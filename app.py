@@ -3,7 +3,7 @@ import streamlit as st
 import plotly_express as px
 
 # Load the dataset into a DataFrame
-df=pd.read_csv(r"C:\Users\oscar\OneDrive\earthquake_data.csv")
+df=pd.read_csv("earthquake_data.csv")
 
 st.title("Earthquake Analysis")
 
