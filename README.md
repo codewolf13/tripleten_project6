@@ -14,5 +14,5 @@ Here are the steps to run my project locally:
 
 1. Clone this repository to your local machine.
 2. Set up a virtual environment and activate it.
-3. Install the required packages: `pip install ...` ... = pandas, streamlit, and plotly_express.
+3. Install the required packages: `pip install -r requirements.txt`.
 4. Run the Streamlit app: `streamlit run app.py`.
