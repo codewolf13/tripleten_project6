@@ -17,5 +17,5 @@ Here are the steps to run my project locally:
 3. Install the required packages: `pip install -r requirements.txt`.
 4. Run the Streamlit app: `streamlit run app.py`.
 
-
-https://lecture-6.onrender.com
+URL of my app on Render:
+https://lecture-6-x75y.onrender.com
