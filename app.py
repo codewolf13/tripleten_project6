@@ -1,6 +1,6 @@
 import pandas as pd
 import streamlit as st
-import plotly_express as px
+import plotly.express as px
 
 # Load the dataset into a DataFrame
 df=pd.read_csv("earthquake_data.csv")
