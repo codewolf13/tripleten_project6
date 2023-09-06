@@ -16,3 +16,6 @@ Here are the steps to run my project locally:
 2. Set up a virtual environment and activate it.
 3. Install the required packages: `pip install -r requirements.txt`.
 4. Run the Streamlit app: `streamlit run app.py`.
+
+
+https://lecture-6.onrender.com
