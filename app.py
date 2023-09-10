@@ -1,3 +1,13 @@
+# Earthquake Analysis
+
+## Project Description
+
+# * The primary objective of this project is to conduct a simple-view Exploratory Data Analysis (EDA) of earthquake data to gain valuable insights into the characteristics, distribution, and patterns of seismic events worldwide.
+# * It aims to explore and visualize key factors, including earthquake magnitude, geographical distribution, alert levels, and the 'Sig' (Significance) parameter, to uncover trends and patterns.
+# * The choice of earthquakes as the subject of analysis stems from the desire to venture beyond the comfort zone and tackle a complex and real-world dataset.
+# * EDA techniques, including data cleaning, descriptive statistics, and visualizations, will be employed to understand the datasets characteristics thoroughly.
+# * Discovering patterns and trends within the earthquake data can contribute to improving earthquake prediction, preparedness, and response strategies.
+
 import pandas as pd
 import streamlit as st
 import plotly.express as px
@@ -9,9 +19,18 @@ st.title("Earthquake Analysis")
 
 df
 
-df.shape
+#df.shape
 
-df.info()
+#df.info()
+
+#there are null values
+df.isnull().values.any()
+
+#Replacing nan values with 'not specified'
+df.fillna('not specified', inplace=True)
+
+#checking for nulls
+df.isnull().values.any()
 
 ### When looking at the info from the graph, the date_time column has nanoseconds for precise measurement data.
 
@@ -22,9 +41,9 @@ df["date_time"]=df["date_time"].apply(pd.to_datetime)
 
 df['date_time'] = df['date_time'].apply(lambda x: x.strftime('%Y'))
 
-df.info()
+#df.info()
 
-## This data contains oceanic earthquake information, therefore creating tsunamis. We'll led the user choose whether to include tsunami occurrence in the data.
+### This data contains oceanic earthquake information, therefore creating tsunamis. We'll led the user choose whether to include tsunami occurrence in the data.
 
 #creating header with an option to filter the data and the checkbox:
 #data set includes 2 options for tsunami: 1=yes an d0=no
@@ -94,6 +113,10 @@ st.write("""
 • Red = Extensive
 """)
 
+#count_all = df['alert'].value_counts()
+
+#count_all
+
 # Alert Level Meaning
 
 #Alert Level refers to an assessment of the potential population exposure to earthquakes in proximity to specific ares.
@@ -113,7 +136,7 @@ def age_category(x):
     
 df['age_category']= df['age'].apply(age_category)
 
-df['age_category']
+#df['age_category']
 
 st.write("""
 ###### Now let's check if Earthquake occurrence has increased over the years and if they're becoming more "significant"
@@ -129,11 +152,15 @@ st.write("""
 ###### The "sig" numbers tend to rise with increasing magnitude numbers. Moreover, the year span doesn't appear to reveal any hidden insights in this graph.
 """)
 
-# SIG
+### SIG
 
-# Sig - A number describing how significant the event is. Larger numbers indicate a more significant event. This value is determined on a number of factors, including: magnitude, maximum MMI, felt reports, and estimated impact
+#Sig - A number describing how significant the event is. Larger numbers indicate a more significant event. This value is determined on a number of factors, including: magnitude, maximum MMI, felt reports, and estimated impact
 
-# We can see how "sig" numbers increase with magnitude
+## Conclusion
+
+# * Through analysis and visualization, this project seeks to shed light on the dynamics of seismic events, ultimately contributing to our understanding of earthquakes' impact and mitigation strategies.
+# * The "sig" numbers tend to rise with increasing magnitude numbers. Moreover, the year span doesn't appear to reveal any hidden insights in this graph.
+# * Additionally, a great majority of these Earquakes occur at a Green Alert Level (325 total), this comes at 42% of earthquakes occurring at Green Alert Lever for this dataset (Total of 782 data, including not specified).
+# * We can further analyze other insights such as mapping in which Continent produces higher Red Alert Level for further precautionary steps in those areas.
 
 #streamlit run earthquake_eda.py
-
