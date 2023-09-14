@@ -18,4 +18,4 @@ Here are the steps to run my project locally:
 4. Run the Streamlit app: `streamlit run app.py`.
 
 URL of my app on Render:
-https://lecture-6-b46k.onrender.com
+https://tripleten-project6-ldnn.onrender.com
