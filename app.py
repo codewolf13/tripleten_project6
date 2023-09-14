@@ -15,8 +15,6 @@ import plotly.express as px
 # Load the dataset into a DataFrame
 df=pd.read_csv("earthquake_data.csv")
 
-st.title("Earthquake Analysis")
-
 df
 
 #df.shape
@@ -38,8 +36,8 @@ df.isnull().values.any()
 
 #since column "date_time" has nanoseconds, we want to change it to to just years for a slider effect
 df["date_time"]=df["date_time"].apply(pd.to_datetime)
-
-df['date_time'] = df['date_time'].apply(lambda x: x.strftime('%Y'))
+df["date_time"]=df['date_time'].apply(lambda x: x.strftime('%Y'))
+df['year'] = df['date_time'].astype(int)
 
 #df.info()
 
@@ -58,24 +56,34 @@ show_tsunami = st.checkbox('Include tsunami occurence')
 show_tsunami
 
 if not show_tsunami:
-    df = df[df.tsunami!='1']
+    df = df[df.tsunami!=1]
 
-#creating options for filter from all servers
+#creating options for filter for countries
 country_choice = df['country'].unique()
 country_choice_man = st.selectbox('Select country:', country_choice)
 
-country_choice_man
+#since I replaced Nans with 'not specified', the select box will show those specific countries that had nan
+#if the country is not specified, I want to show the entire data frame
+#we'll add a condition that only filters the dataframe if the actual country is selected
+
+if country_choice_man != 'not specified':
+    df = df[df.country==country_choice_man]
 
 #next let's create a slider for years, so that users can filter earthquakes 
-#creating min and max years as limits fro sliders
+#creating min and max years as limits for sliders
 min_year, max_year=int(df['date_time'].min()), int(df['date_time'].max())
 
 #creating slider
 year_range = st.slider(
-    "Choose years",
+    "Choose years:",
     value=(min_year,max_year),min_value=min_year,max_value=max_year)
 
-year_range
+year1, year2 = year_range
+
+st.write(df['year'].dtype)
+df = df.loc[(df['year'] >= year1) & (df['year'] <= year2)]
+
+# year_range
 
 st.header('Earthquake analysis')
 st.write("""
